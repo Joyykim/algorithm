@@ -64,22 +64,3 @@ def solution(numbers, hand):
             elif right_dis < left_dis:
                 answer, right = right_push(answer, i)
     return answer
-
-
-result = solution([1, 3, 4, 5, 8, 2, 1, 4, 5, 9, 5], "right")
-print(result == "LRLLLRLLRRL")
-print(result)
-
-"""
-입력값 〉	[1, 3, 4, 5, 8, 2, 1, 4, 5, 9, 5], "right"
-기댓값 〉	"LRLLLRLLRRL"
-실행 결과 〉	실행한 결괏값 "LRLRRRLLRRR"이(가) 기댓값 "LRLLLRLLRRL"와(과) 다릅니다.
-
-입력값 〉	[7, 0, 8, 2, 8, 3, 1, 5, 7, 6, 2], "left"
-기댓값 〉	"LRLLRRLLLRR"
-실행 결과 〉	실행한 결괏값 "LRLLLRLRLRR"이(가) 기댓값 "LRLLRRLLLRR"와(과) 다릅니다.
-
-입력값 〉	[1, 2, 3, 4, 5, 6, 7, 8, 9, 0], "right"
-기댓값 〉	"LLRLLRLLRL"
-실행 결과 〉	실행한 결괏값 "LLRLRRLRRR"이(가) 기댓값 "LLRLLRLLRL"와(과) 다릅니다.
-"""
