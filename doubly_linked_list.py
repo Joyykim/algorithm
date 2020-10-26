@@ -8,28 +8,37 @@ class Node:
 class DoublyLinkedList:
     def __init__(self):
         self.head = None
+        self.tail = None
 
     def is_empty(self):
         return self.head is None
 
     def prepend(self, value):
-        if self.head is None:
+        if self.is_empty():
             self.head = Node(value)
+            self.tail = self.head
         else:
-            new_node = Node(value, self.head)
-            self.head.prev = new_node
-            self.head = new_node
+            node = Node(value, self.head)
+            self.head.prev = node
+            self.head = node
 
     def append(self, value):
-        if self.head is None:
-            self.head = Node(value)
+        if self.is_empty():
+            self.head = Node(value, None, None)
+            self.tail = self.head
         else:
-            curr = self.head
-            while curr.next is not None:
-                curr = curr.next
-            curr.next = Node(value, None, curr)
+            node = Node(value, None, self.tail)
+            self.tail.next = node
+            self.tail = node
+
+            # node = Node(value, self.head)
+            # self.tail.next = node
+            # self.head = node
+            # self.tail = Node(value, None, self.tail)
 
     def set_head(self, index):
+        if self.is_empty():
+            return False
         curr = self.head
         for _ in range(index):
             if curr is None:
@@ -66,7 +75,7 @@ class DoublyLinkedList:
 
         new_node = Node(value, curr, curr.prev)
         curr.prev.next = new_node
-        # curr.prev = new_node
+        curr.prev = new_node
         return True
 
     def remove(self, index):
@@ -115,8 +124,8 @@ class DoublyLinkedList:
             result += f'{curr.value}]'
             print(result)
 
-    def reverse_print(self):
-        """역방향 프린트"""
+    def reverse_list(self):
+        """prev를 타서 리스트화"""
         if self.head is None:
             print('[]')
             return
@@ -125,14 +134,15 @@ class DoublyLinkedList:
         while curr.next is not None:
             curr = curr.next
 
-        result = '['
+        result = []
         while curr.prev is not None:
-            result += f'{curr.value}, '
+            result.append(curr.value)
             curr = curr.prev
-        result += f'{curr.value}]'
-        print(result)
+        result.append(curr.value)
+        return result
 
     def test(self):
+        """next, prev 연결이 잘되었는지 테스트"""
         curr = my_list.head
         if curr is not None:
             next_list = []
