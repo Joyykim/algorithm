@@ -91,18 +91,6 @@ class DoublyLinkedList:
         curr.next.prev = prev
         return True
 
-    def print(self):
-        if self.head is None:
-            print('[]')
-        else:
-            curr = self.head
-            result = '['
-            while curr.next is not None:
-                result += f'{curr.value}, '
-                curr = curr.next
-            result += f'{curr.value}]'
-            print(result)
-
     def __str__(self) -> str:
         if self.head is None:
             return '[]'
@@ -114,7 +102,21 @@ class DoublyLinkedList:
         result += f'{curr.value}]'
         return result
 
+    def print(self):
+        """정방향 프린트"""
+        if self.head is None:
+            print('[]')
+        else:
+            curr = self.head
+            result = '['
+            while curr.next is not None:
+                result += f'{curr.value}, '
+                curr = curr.next
+            result += f'{curr.value}]'
+            print(result)
+
     def reverse_print(self):
+        """역방향 프린트"""
         if self.head is None:
             print('[]')
             return
@@ -129,6 +131,21 @@ class DoublyLinkedList:
             curr = curr.prev
         result += f'{curr.value}]'
         print(result)
+
+    def test(self):
+        curr = my_list.head
+        if curr is not None:
+            next_list = []
+            prev_list = []
+            while curr.next is not None:
+                next_list.append(curr)
+                curr = curr.next
+
+            while curr.prev is not None:
+                prev_list.append(curr)
+                curr = curr.prev
+            print(next_list)
+            print(prev_list)
 
 
 my_list = DoublyLinkedList()
@@ -156,17 +173,3 @@ my_list.remove(4)
 # my_list.set_head(10)
 my_list.print()
 my_list.reverse_print()
-
-# curr = my_list.head
-# if curr is not None:
-#     next_list = []
-#     prev_list = []
-#     while curr.next is not None:
-#         next_list.append(curr)
-#         curr = curr.next
-#
-#     while curr.prev is not None:
-#         prev_list.append(curr)
-#         curr = curr.prev
-#     print(next_list)
-#     print(prev_list)
