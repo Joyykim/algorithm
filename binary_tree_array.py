@@ -70,7 +70,7 @@ class BinaryTree:
             if self.array[i] == value:
                 return True
 
-            # left, right 노드 탐색 결과
+            # left, right 노드 탐색
             if traversal(i * 2 + 1) or traversal(i * 2 + 2):
                 return True
             else:
