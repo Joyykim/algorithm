@@ -44,6 +44,7 @@ class LinkedQueue:
                 s += f'{curr.value}, '
                 curr = curr.next
             s += f'{curr.value}]'
+            print(s)
 
     def is_empty(self):
         return self.head is None
