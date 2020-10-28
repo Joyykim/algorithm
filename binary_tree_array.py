@@ -72,10 +72,7 @@ class BinaryTree:
                 return True
 
             # left, right 노드 탐색
-            if search(i * 2 + 1) or search(i * 2 + 2):
-                return True
-            else:
-                return False
+            return search(i * 2 + 1) or search(i * 2 + 2)
 
         return search(0)
 
@@ -90,5 +87,7 @@ print()
 print('postorder')
 bt.postorder()  # 8 9 4 10 5 2 6 7 3 1
 print()
-print('bfs', bt.bfs(1))
-print('dfs', bt.dfs(1))
+print('bfs right', bt.bfs(1))
+print('bfs wrong', bt.bfs(11))
+print('dfs right', bt.dfs(1))
+print('dfs wrong', bt.dfs(11))
