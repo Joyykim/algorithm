@@ -21,13 +21,14 @@ class LinearQueue:
         if self.front == self.rear:
             return None
 
+        value = self.array[self.front - 1]
         self.front += 1
-        return self.array[self.front - 1]
+        return value
 
     def peek(self):
         if self.is_empty():
             return None
-        return self.array[self.rear - 1]
+        return self.array[self.front]
 
     def is_empty(self):
         return self.front == self.rear
