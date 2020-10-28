@@ -35,7 +35,15 @@ class LinkedQueue:
         return self.head.value
 
     def print(self):
-        pass
+        if self.is_empty():
+            print('[]')
+        else:
+            s = '['
+            curr = self.head
+            while curr.next is not None:
+                s += f'{curr.value}, '
+                curr = curr.next
+            s += f'{curr.value}]'
 
     def is_empty(self):
         return self.head is None
