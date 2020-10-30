@@ -14,6 +14,7 @@ def dijkstra(start, graph):
         # 현재 노드
         dist, node = heapq.heappop(heap)
 
+        # 최소 힙 사용시 퍼포먼스 최적화를 위해 꼭 필요
         if distances[node] < dist:
             continue
 
