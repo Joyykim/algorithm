@@ -63,17 +63,6 @@ class BinaryTree:
             if node.right is not None:
                 queue.append(node.right)
 
-        #
-        # def search(node):
-        #     if node is None:
-        #         return False
-        #     if dq.pop() == value:
-        #         return True
-        #
-        #     return search(node.left) or search(node.right)
-        #
-        # return search(self.root)
-
     def dfs(self, value):
         def traversal(node):
             if node is None:
