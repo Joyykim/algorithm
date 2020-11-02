@@ -72,7 +72,9 @@ class BinaryTree:
                 return True
 
             # left, right 노드 탐색
-            return search(i * 2 + 1) or search(i * 2 + 2)
+            left_search_result = search(i * 2 + 1)
+            right_search_result = search(i * 2 + 2)
+            return left_search_result or right_search_result
 
         return search(0)
 
