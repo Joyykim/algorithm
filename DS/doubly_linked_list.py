@@ -24,21 +24,15 @@ class DoublyLinkedList:
 
     def append(self, value):
         if self.is_empty():
-            self.head = Node(value, None, None)
+            self.head = Node(value)
             self.tail = self.head
         else:
-            node = Node(value, None, self.tail)
+            node = Node(value, self.head)
             self.tail.next = node
-            self.tail = node
-
-            # node = Node(value, self.head)
-            # self.tail.next = node
-            # self.head = node
-            # self.tail = Node(value, None, self.tail)
+            self.head = node
+            self.tail = Node(value, None, self.tail)
 
     def set_head(self, index):
-        if self.is_empty():
-            return False
         curr = self.head
         for _ in range(index):
             if curr is None:
@@ -67,24 +61,36 @@ class DoublyLinkedList:
             self.prepend(value)
             return True
 
+        # index 찾아가기
         curr = self.head
         for _ in range(index):
             if curr is None:
                 return False
             curr = curr.next
 
-        new_node = Node(value, curr, curr.prev)
-        curr.prev.next = new_node
-        curr.prev = new_node
+        # 마지막 노드일 때
+        if curr is None:
+            node = Node(value, None, self.tail)
+            self.tail.next = node
+            self.tail = node
+        # 중간 노드일 때
+        else:
+            node = Node(value, curr, curr.prev)
+            curr.prev.next = node
+            curr.prev = node
+
         return True
 
     def remove(self, index):
+        # 빈 리스트 -> False
+        if self.is_empty():
+            return False
+
+        # 인덱스 0이고 원소가 하나였을때
         if index == 0:
-            if self.head is not None:
-                self.head = self.head.next
-                return True
-            else:
-                return False
+            self.head = self.head.next
+            self.tail =
+            return True
 
         curr = self.head
         for _ in range(index):
@@ -94,10 +100,14 @@ class DoublyLinkedList:
 
         if curr is None:
             return False
-        prev = curr.prev
 
-        prev.next = curr.next
-        curr.next.prev = prev
+        curr.prev.next = curr.next
+        if curr.next is not None:
+            curr.next.prev = curr.prev
+        else:
+            # 삭제하려는 노드가 tail
+            self.tail = curr.prev
+
         return True
 
     def __str__(self) -> str:
@@ -141,21 +151,22 @@ class DoublyLinkedList:
         result.append(curr.value)
         return result
 
-    def test(self):
-        """next, prev 연결이 잘되었는지 테스트"""
-        curr = my_list.head
-        if curr is not None:
-            next_list = []
-            prev_list = []
-            while curr.next is not None:
-                next_list.append(curr)
-                curr = curr.next
 
-            while curr.prev is not None:
-                prev_list.append(curr)
-                curr = curr.prev
-            print(next_list)
-            print(prev_list)
+def test_DLL(doubly_linked_list):
+    """next, prev 연결이 잘되었는지 테스트"""
+    curr = doubly_linked_list.head
+    if curr is not None:
+        next_list = []
+        prev_list = []
+        while curr.next is not None:
+            next_list.append(curr)
+            curr = curr.next
+
+        while curr.prev is not None:
+            prev_list.append(curr)
+            curr = curr.prev
+        print(next_list)
+        print(prev_list)
 
 
 my_list = DoublyLinkedList()
@@ -182,4 +193,5 @@ my_list.remove(4)
 
 # my_list.set_head(10)
 my_list.print()
-my_list.reverse_print()
+
+test_DLL()
