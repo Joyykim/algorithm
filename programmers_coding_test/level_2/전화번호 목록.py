@@ -1,8 +1,8 @@
-def solution(phone_book):
+def solution1(phone_book):
     phone_set = set()
 
     # 길이가 짧은 순으로 정렬
-    phone_book.sort(key=lambda x: len(x))
+    phone_book.sort(key=len)
 
     # phone_num 하나씩 검사
     for phone_num in phone_book:
@@ -19,12 +19,32 @@ def solution(phone_book):
     return True
 
 
-a = ['119', '97674223', '1195524421']
+def solution2(phone_book):
+    answer = True
+
+    #
+    hash_set = set(phone_book)
+
+    # phone_num 하나씩 검사
+    for phone_number in phone_book:
+
+        for i in range(1, len(phone_number) + 1):
+            # 접두사 = 앞글자부터 하나씩 길이를 늘려가며 slice 한 것
+            # ex) "119" > "1", "11", "119"
+            prefix = phone_number[:i]
+
+            # 접두사가 set에 있는지(자신 제외 - "119")
+            if prefix in hash_set and prefix != phone_number:
+                answer = False
+    return answer
+
+
+a = ['119', '976', '11955']
 b = ['123', '456', '789']
 c = ['12', '123', '1235', '567', '88']
 
-r1 = solution(a) == False
-r2 = solution(b) == True
-r3 = solution(c) == False
+r1 = solution1(a) == False
+r2 = solution1(b) == True
+r3 = solution1(c) == False
 
 print(r1, r2, r3)
