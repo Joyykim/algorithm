@@ -22,7 +22,7 @@ def solution1(phone_book):
 def solution2(phone_book):
     answer = True
 
-    #
+    # 주어진 리스트로 set 생성
     hash_set = set(phone_book)
 
     # phone_num 하나씩 검사
